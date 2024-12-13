@@ -1,0 +1,163 @@
+﻿@page
+@model LoginModel
+@{
+    Layout = null;
+}
+
+<body>
+    <div class="container">
+        <div class="left">
+            <h2>Uniting for a Better Future: Honoring Our Past, Strengthening Our Community Today.</h2>
+            <img src="~/resources/pic1.jpg" alt="Art Illustration">
+        </div>
+
+        <div class="right">
+            <h2>Sign in as admin</h2>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div> <!-- Validation summary -->
+
+            <div class="separator">
+                <hr><span>Or</span><hr>
+            </div>
+
+            <form id="account" method="post">
+                <label asp-for="Input.Email">Username or Email Address</label>
+                <input asp-for="Input.Email" class="form-control" placeholder="Enter your username or email" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                <label asp-for="Input.Password">Password</label>
+                <input asp-for="Input.Password" class="form-control" type="password" placeholder="Enter your password" aria-required="true" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        Remember me
+                    </label>
+                </div>
+
+                <button type="submit" class="signin-btn">Sign In</button>
+            </form>
+
+            <p>
+                <a asp-page="./ForgotPassword">Forgot your password?</a>
+            </p>
+           
+            <p>
+                <a asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    /* Basic page styling */
+    body {
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("https://images.unsplash.com/photo-1529766344952-5935b1af9a73?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Replace with actual image path */
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        display: flex;
+        width: 800px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .left {
+        flex: 1;
+        background-color: #B2D8B2; /* Slightly darker pastel green */
+        padding: 40px;
+        color: #4A6B4A; /* Dark green for text */
+    }
+
+        .left h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .left img {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+    .right {
+        flex: 1;
+        padding: 40px;
+        background-color: #FFFFFF;
+    }
+
+        .right h2 {
+            font-size: 24px;
+            color: #4A6B4A; /* Dark green */
+            margin-bottom: 20px;
+        }
+
+
+    .separator {
+        display: flex;
+        align-items: center;
+        color: #999;
+        margin: 20px 0;
+    }
+
+        .separator hr {
+            flex: 1;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        .separator span {
+            margin: 0 10px;
+        }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #4A6B4A; /* Dark green */
+    }
+
+    input {
+        padding: 10px;
+        margin-top: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+    }
+
+        input:focus {
+            border-color: #8FC08F; /* Pastel green focus color */
+        }
+
+
+    .signin-btn {
+        background-color: #8FC08F; /* Pastel green button */
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 4px;
+    }
+</style>
+

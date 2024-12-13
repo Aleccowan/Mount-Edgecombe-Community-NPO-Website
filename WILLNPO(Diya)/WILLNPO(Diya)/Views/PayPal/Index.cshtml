@@ -1,0 +1,175 @@
+﻿@section Scripts {
+    <script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.ClientId"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'silver',
+                tagline: 'false'
+            },
+            createOrder: (data, actions) => {
+                return fetch("@Url.Action("Order")", {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    return response.json();
+                }).then((order) => order.id)
+                    .catch(error => alert(error.message));
+            },
+            onApprove: (data, actions) => {
+                return fetch("@Url.Action("Capture")?orderId=" + data.orderID, {
+                    method: "post",
+                }).then((response) => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    window.location.href = "@Url.Action("Success")";
+                }).catch(error => alert(error.message));
+            }
+        }).render('#paypal-button-container');
+    </script>
+    }
+
+    <section itemid="main">
+        <div class="hero-container">
+            <div class="hero-image1">
+                <div class="hero-text">
+                    <h1>Ways to help</h1>
+                    <p>Empowering Our Community, Honoring Our Legacy</p>
+                <p>Check out our wish list bellow!!!</p>
+                  
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+<div class="container3">
+    <h2>Donation WishList</h2>
+    <p class="subtitle">Every contribution, big or small, makes a difference</p>
+    <div class="items">
+        <!-- First Item -->
+        <div class="card">
+            <img src="https://media.istockphoto.com/id/1284074785/photo/non-perishable-foods-coming-out-a-paper-bag-copy-space.webp?a=1&b=1&s=612x612&w=0&k=20&c=HV928I9sHQqAMG0AS_b2P4FB3zqY2CWCYLPDqnxaXuo=" alt="Non-Perishable Food Items" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Non-Perishable Food Items</p>
+                <p class="card__description">
+                    Donations of canned goods, dried foods, and other non-perishable food items . These items provide vital nourishment and support to families facing food insecurity. Your contribution can make a real difference .
+                </p>
+            </div>
+        </div>
+
+        <!-- Second Item -->
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1677013011910-0e6de01615b9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y2xvdGhlcyUyMG9sZHxlbnwwfHwwfHx8MA%3D%3D" alt="Clothing" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Clothing</p>
+                <p class="card__description">
+                    We are accepting gently used or new clothing items for all ages, from infants to adults. Whether it's winter coats, shirts, pants, or shoes, your donation will provide warmth and comfort to those who need it most, especially in colder months.
+                </p>
+            </div>
+        </div>
+
+        <!-- Third Item -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1599623560574-39d485900c95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG95c3xlbnwwfHwwfHx8MA%3D%3D" alt="Toys" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Toys</p>
+                <p class="card__description">
+                    Toy donations bring joy to children in need. Whether it's educational toys, games, or stuffed animals, your contribution will help create smiles and bring some happiness to young ones in difficult situations.
+                </p>
+            </div>
+        </div>
+
+        <!-- Fourth Item -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1546552616-6c9bd78ec972?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGZ1cm5pdHVyZSUyMG9sZHxlbnwwfHwwfHx8MA%3D%3D" alt="Furniture" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Furniture</p>
+                <p class="card__description">
+                    Donate gently used furniture such as sofas, chairs, tables, and beds. These donations help families and individuals who are setting up a new home or who have fallen on hard times. Your generosity will provide comfort and stability for those in need.
+                </p>
+            </div>
+        </div>
+
+        <!-- Fifth Item -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1517090823101-30a5937ceb3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGVucyUyMG9sZHxlbnwwfHwwfHx8MA%3D%3D" alt="School Supplies" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">School Supplies</p>
+                <p class="card__description">
+                    Help provide essential school supplies such as notebooks, pens, pencils, and backpacks to children in need. Your donation will ensure that every child has the tools they need to succeed in their education.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sixth Item -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1540703173855-e8e45e53bc2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJsYW5rZXRzfGVufDB8fDB8fHww" alt="Bedding" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Bedding</p>
+                <p class="card__description">
+                    Donate clean, gently used bedding, blankets, pillows, and sheets. These items will help provide a comfortable night's rest to those in need, especially families who may not have adequate living conditions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Seventh Item -->
+        <div class="card">
+            <img src="https://plus.unsplash.com/premium_photo-1664007755648-579d4f9dfe39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG9pbGV0cmllc3xlbnwwfHwwfHx8MA%3D%3D" alt="Personal Hygiene Items" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Personal Hygiene Items</p>
+                <p class="card__description">
+                    Donations of soap, shampoo, toothbrushes, toothpaste, and other personal hygiene products help individuals maintain their well-being and dignity..
+                </p>
+            </div>
+        </div>
+
+        <!-- Eighth Item -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1600091474842-83bb9c05a723?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zmlyc3RhaWQlMjBraXR8ZW58MHx8MHx8fDA%3D" alt="Medical Supplies" class="card__icon">
+            <div class="card__content">
+                <p class="card__title">Medical Supplies</p>
+                <p class="card__description">
+                    Help donate medical supplies such as bandages, antiseptics, and over-the-counter medications. Your contributions can aid individuals in need of basic medical care and can save lives in emergencies.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="donate-section">
+        <p class="donate-text">Your generosity can make a difference in someone's life. Click below to download our banking details and make a contribution today!</p>
+        <a href="~/resources/banking details npo.pdf" download class="download-btn">Download Banking Details</a>
+    </div>
+</div>
+
+
+
+
+<section class="content-container" id="Volunteer">
+    <div class="text-container">
+        <h2>Volunteer</h2>
+
+        <p>
+            If you’re interested in volunteering for our NPO and making a difference in the community, we’d love to hear from you! Please fill out the Google form below, providing your details and telling us a little bit about why you would like to volunteer with us. We’re looking for passionate individuals who are committed to supporting our mission, and your response will help us understand how your skills and enthusiasm can contribute to our efforts. We can’t wait to learn more about what motivates you to be a part of this meaningful work!
+            
+
+        </p>
+
+        <a href="https://forms.gle/iTA9vsNuN7hZcdw46" target="_blank">
+            <button class="btn">Fill out the Form</button>
+        </a>
+      
+    </div>
+    <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1730328714622-8d30106f03dc?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="team" class="img-fluid custom-img-size1" aria-describedby="team-description">
+
+        <span id="team-description" class="visually-hidden">Image of npo team participating in an event or activity.</span>
+    </div>
+</section>
+
+

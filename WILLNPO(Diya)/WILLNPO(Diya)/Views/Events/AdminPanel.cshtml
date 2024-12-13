@@ -1,0 +1,65 @@
+﻿@model List<WILLNPO_Diya_.Models.Event>
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+<body>
+<div class="containerAdmin">
+    <h2>Admin Panel - Manage Events</h2>
+
+    <!-- Add New Event Form -->
+    <div class="event-form">
+        <h3>Add New Event</h3>
+            <form asp-action="AddEvent" method="post" enctype="multipart/form-data">
+                <label for="name">Event Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required>
+
+                <label for="dateTime">Date & Time:</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" required>
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="imageFile">Upload Image:</label>
+                <input type="file" id="imageFile" name="imageFile" accept="image/*">
+
+                <button type="submit" class="btn-add">Add Event</button>
+            </form>
+
+    </div>
+
+    <!-- Event List -->
+    <h3>Current Events</h3>
+    <table class="event-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date & Time</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evt in Model)
+            {
+                <tr>
+                    <td>@evt.name</td>
+                    <td>@evt.description</td>
+                    <td>@evt.dateTime</td>
+                    <td>@evt.location</td>
+                    <td>
+                        <form asp-action="DeleteEvent" method="post">
+                            <input type="hidden" name="name" value="@evt.name" />
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</body>
+

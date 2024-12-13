@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "Our Team";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Full-screen particles.js container */
+        #particles-js {
+            position: fixed; /* Fixed so it covers the entire screen */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Ensure particles stay in the background */
+            background: #000; /* Fallback background color */
+        }
+
+        /* Wrapper for portfolio content */
+        .team-portfolio {
+            position: relative;
+            z-index: 1;
+            color: white;
+            min-height: 100vh;
+            padding: 50px 15px; /* Adjust padding for responsiveness */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .team-portfolio h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin-bottom: 1.5rem;
+            }
+
+            .team-portfolio .card {
+                background: rgba(255, 255, 255, 0.9);
+                color: black;
+                border-radius: 15px;
+                transition: transform 0.3s ease-in-out;
+            }
+
+                .team-portfolio .card:hover {
+                    transform: scale(1.05);
+                }
+
+            .team-portfolio .btn-primary {
+                background-color: #4CAF50;
+                border: none;
+            }
+
+                .team-portfolio .btn-primary:hover {
+                    background-color: #45a049;
+                }
+
+        .fun-fact {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        img.card-img-top {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+
+    <!-- Team Portfolio Content -->
+    @model List<TeamMember>
+    <div class="team-portfolio">
+        <div class="container">
+            <h1 class="text-center">Meet Our Team</h1>
+            <p class="text-center text-muted mb-5">
+                A team of dedicated developers with diverse skills and a passion for crafting great software.
+            </p>
+
+            <div class="row">
+                @foreach (var member in Model)
+
+                {
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="card shadow border-0 text-center">
+                            <img src="@member.ProfilePictureUrl" alt="Profile picture of @member.Name"
+                                 class="card-img-top rounded-circle mx-auto mt-3 img-fluid">
+                            <div class="card-body">
+                                <h5 class="card-title">@member.Name</h5>
+                                <p class="text-muted">@member.Role</p>
+                                <p class="card-text">@member.About</p>
+                                <div class="fun-fact">
+                                    <strong>Fun Fact:</strong> @member.FunFact
+                                </div>
+                                <a href="@Url.Action("DownloadCV", "Hidden", new { memberId = member.Id })" class="btn btn-primary btn-sm">
+                                    Download CV
+                                </a>
+                                <p class="mt-2">
+                                    <a href="@member.LinkedInUrl" target="_blank" class="btn btn-info btn-sm">
+                                        LinkedIn Profile
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Add jQuery and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Add Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        /* Particles.js Configuration */
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: {
+                    type: "circle",
+                    stroke: { width: 0, color: "#000000" },
+                    polygon: { nb_sides: 5 },
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false },
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.4,
+                    width: 1,
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 },
+                },
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true,
+                },
+                modes: {
+                    grab: { distance: 400, line_linked: { opacity: 1 } },
+                    bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                    repulse: { distance: 200, duration: 0.4 },
+                    push: { particles_nb: 4 },
+                    remove: { particles_nb: 2 },
+                },
+            },
+            retina_detect: true,
+        });
+    </script>
+</body>
+</html>
